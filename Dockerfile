@@ -27,9 +27,8 @@ RUN ARCH=${TARGETPLATFORM#linux/} && wget https://github.com/wkhtmltopdf/packagi
 
 
 # install dumb-init
-RUN ARCH=${TARGETPLATFORM#linux/} && wget https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_$ARCH.deb && \
-    dpkg -i dumb-init_1.2.2_$ARCH.deb
-RUN chmod +x /usr/local/bin/dumb-init
+RUN ARCH=${TARGETPLATFORM#linux/} && wget https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_$ARCH.deb \
+    && dpkg -i dumb-init_1.2.2_$ARCH.deb
 ENTRYPOINT ["dumb-init", "--"]
 
 
