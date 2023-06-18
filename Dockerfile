@@ -1,11 +1,12 @@
 FROM node:16-bullseye-slim
 
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+ARG ARCH
+RUN ARCH=${TARGETPLATFORM#linux/}
+
+
 ENV DEBIAN_FRONTEND noninteractive
-
-
-# default arch to amd64
-ARG ARCH=amd64
-
 
 # Install latest chromium dev package and fonts to support major charsets (Chinese, Japanese, Arabic, Hebrew, Thai and a few others)
 # Note: this installs the necessary libs to make the bundled version of Chromium that Puppeteer installs, work.

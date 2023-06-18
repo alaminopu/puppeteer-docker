@@ -22,12 +22,17 @@ TAG = $(shell git rev-parse --short HEAD)
 DOCKER_IMAGE = "docker.io/alaminopu/puppeteer-docker:$(TAG)"
 BUILD_ARGS = --build-arg ARCH=$(arch)
 
+docker-builder:
+    # skip if already exists
+	docker buildx create --name mybuilder || true
+	# use it
+	docker buildx use mybuilder
 
 docker-login:
 	docker login -u $(DOCKER_USER) -p $(DOCKER_PASS)
 
-docker-build:
-	docker buildx build --platform linux/amd64,linux/arm64 -t $(DOCKER_IMAGE) $(BUILD_ARGS) .
+docker-build: docker-builder
+	docker buildx build --push --platform linux/amd64,linux/arm64 -t $(DOCKER_IMAGE) $(BUILD_ARGS) .
 
 docker-run: docker-build
 	docker run -it --rm $(DOCKER_IMAGE)
