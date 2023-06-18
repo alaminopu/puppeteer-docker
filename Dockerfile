@@ -20,14 +20,18 @@ RUN apt-get update \
       libxrender1 libxss1 libxtst6 lsb-release wget xdg-utils \
       --no-install-recommends
 
-# install dumb-init
-ADD https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_x86_64 /usr/local/bin/dumb-init
-RUN chmod +x /usr/local/bin/dumb-init
-ENTRYPOINT ["dumb-init", "--"]
-
 # Install wkhtmltopdf and wkhtmltoimage.
 # More details here: https://wkhtmltopdf.org/downloads.html
 RUN ARCH=${TARGETPLATFORM#linux/} && wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bullseye_$ARCH.deb \
     && dpkg -i wkhtmltox_0.12.6.1-2.bullseye_$ARCH.deb
+
+
+# install dumb-init
+RUN ARCH=${TARGETPLATFORM#linux/} && wget https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_$ARCH.deb && \
+    dpkg -i dumb-init_1.2.2_$ARCH.deb
+RUN chmod +x /usr/local/bin/dumb-init
+ENTRYPOINT ["dumb-init", "--"]
+
+
 
 
