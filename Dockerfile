@@ -3,7 +3,6 @@ FROM node:16-bullseye-slim
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 ARG ARCH
-RUN ARCH=${TARGETPLATFORM#linux/}
 
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -28,7 +27,7 @@ ENTRYPOINT ["dumb-init", "--"]
 
 # Install wkhtmltopdf and wkhtmltoimage.
 # More details here: https://wkhtmltopdf.org/downloads.html
-RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bullseye_$ARCH.deb
-RUN apt-get install -f ./wkhtmltox_0.12.6.1-2.bullseye_$ARCH.deb
+RUN ARCH=${TARGETPLATFORM#linux/} && wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bullseye_$ARCH.deb \
+    && dpkg -i wkhtmltox_0.12.6.1-2.bullseye_$ARCH.deb
 
 
