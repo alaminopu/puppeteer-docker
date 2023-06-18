@@ -31,3 +31,4 @@ jobs:
         context: .
         push: true
         tags: alaminopu/puppeteer-docker:latest
+        platforms: linux/amd64,linux/arm64

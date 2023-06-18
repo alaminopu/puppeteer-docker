@@ -32,3 +32,4 @@ jobs:
           context: .
           push: true
           tags: alaminopu/puppeteer-docker:{{ github.ref }}
+          platforms: linux/amd64,linux/arm64
