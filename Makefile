@@ -24,12 +24,9 @@ BUILD_ARGS = --build-arg ARCH=$(arch)
 
 docker-builder:
     # skip if already exists
-	docker buildx create --name mybuilder || true
+	docker buildx create --name multiarch || true
 	# use it
-	docker buildx use mybuilder
-
-docker-login:
-	docker login -u $(DOCKER_USER) -p $(DOCKER_PASS)
+	docker buildx use multiarch
 
 docker-build: docker-builder
 	docker buildx build --push --platform linux/amd64,linux/arm64 -t $(DOCKER_IMAGE) $(BUILD_ARGS) .
@@ -37,6 +34,6 @@ docker-build: docker-builder
 docker-run: docker-build
 	docker run -it --rm $(DOCKER_IMAGE)
 
-docker-push: docker-build docker-login
+docker-push: docker-build
 	docker push $(DOCKER_IMAGE)
 
