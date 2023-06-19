@@ -15,6 +15,25 @@ make build
 make run
 ```
 
+## example
+
+Check the [example](./example) folder for a working example.
+
+## Notes
+
+Use the following code to launch puppeteer.
+
+```javascript
+const browser = await puppeteer.launch({
+    headless: true,
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+    ],
+  });
+```
+
 
 # Credit
 
