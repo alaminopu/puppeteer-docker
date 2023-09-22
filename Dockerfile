@@ -1,4 +1,4 @@
-FROM node:16-bullseye-slim
+FROM node:18.18.0-bookworm-slim
 
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
