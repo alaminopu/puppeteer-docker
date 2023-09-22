@@ -27,8 +27,8 @@ RUN apt-get update \
 
 # Install wkhtmltopdf and wkhtmltoimage.
 # More details here: https://wkhtmltopdf.org/downloads.html
-RUN ARCH=${TARGETPLATFORM#linux/} && wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bullseye_$ARCH.deb \
-    && dpkg -i wkhtmltox_0.12.6.1-2.bullseye_$ARCH.deb
+RUN ARCH=${TARGETPLATFORM#linux/} && wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bookworm_$ARCH.deb \
+    && dpkg -i wkhtmltox_0.12.6.1-3.bookworm_$ARCH.deb
 
 
 # install dumb-init
